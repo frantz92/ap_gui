@@ -1,0 +1,253 @@
+html, body {
+  background-image: linear-gradient( #2a2a2b, #3e3e40);
+  font-family: Verdana, sans-serif;
+  background-size: cover;
+  margin: 0;
+  min-height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.loader {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  opacity: 0;
+  display: flex;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader.show {
+  opacity: .7;
+  visibility: visible;
+}
+
+.loader img {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+section {
+  padding-left: 10vw;
+  display: block;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2, h3 {
+  font-family: Verdana, sans-serif;
+  text-align: center;
+  color: #1b908f;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.main-nav {
+  position: fixed;
+  width: 10vw;
+  display: flex;
+  flex-direction: column;
+  z-index: 6;
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+.battery-cover {
+  width: 70%;
+  margin: auto;
+  height: 20px;
+  border-radius: 20%;
+  color: #1b908f;
+  border: 2px solid #1b908f;
+}
+
+.battery-level {
+  background-color: #1b908f;
+  height: 100%;
+  border-radius: 10%;
+  position: relative;
+}
+
+.battery-cover p {
+  margin: auto;
+  color: black;
+  position: absolute;
+  top: 45px;
+  left: 40%;
+}
+
+.main-nav button,
+.page .settings-list button {
+  height: 10vw;
+  width: 100%;
+  border-radius: 30%;
+  margin: 2.5vh 0;
+  color: #1b908f;
+  border: 3px solid #1b908f;
+  background-color: transparent;
+  font-size: 1.5vw;
+}
+
+.main-nav button:hover,
+.page .settings-list button:hover {
+  background-color: #1b908f;
+  color: black;
+  transition: .5s ease-out;
+}
+
+.fa-circle {
+  animation: pulse 2s infinite;
+  color: red;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.table {
+  width: 80vw;
+  margin: 0 5vw;
+  border: 1px solid black;
+  color: #1b908f;
+  text-align: center;
+  border-collapse: collapse;
+  background-color: transparent;
+}
+
+.table tr, th, td {
+  border: 0.25px black dashed;
+}
+
+.table th {
+  font-size: 30px;
+}
+
+.live-values-container {
+  height: 10vh;
+  padding-left: 5vw;
+  display: flex;
+  flex-direction: row;
+  font-size: 25px;
+  align-items: center;
+  color: #1b908f;
+}
+
+.display-value {
+  margin-right: 10px;
+}
+
+.fa-thermometer-three-quarters, .fa-tint-slash, .fa-thermometer-half {
+  color: rgb(249, 89, 94);
+  margin-right: 2.5px;
+}
+
+.fa-smog, .fa-tint {
+  color: rgb(120, 182, 231);
+  margin-right: 2.5px;
+}
+
+.fa-cloudscale {
+  color: rgb(139, 232, 225);
+  margin-right: 2.5px;
+}
+
+.fa-sun, .fa-thermometer {
+  color: rgb(229, 210, 105);
+  margin-right: 2.5px;
+}
+
+.settings-list {
+  width: 20vw;
+  margin: auto;
+  margin-top: 6vh;
+}
+
+.confirmation-popup, .choose-popup, .calibration-popup {
+  position: relative;
+  width: 60vw;
+  border: 2px #1b908f solid;
+  border-radius: 10px;
+  color: #1b908f;
+  text-align: center;
+  margin: auto;
+  font-size: 12px;
+  display: none;
+}
+
+.page button {
+  background-color: transparent;
+  border: none;
+}
+.answer-no, .answer-yes, .cal-luxometer, .cal-thermometer {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 5px 20%;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.choose-popup .answer-no {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 5px;
+  padding: 0;
+}
+
+.page .answer-no {
+  color: red;
+  opacity: 0.6;
+}
+.page .answer-yes{
+  color: green;
+  opacity: 1;
+}
+
+.date-time {
+  text-align: center;
+  color: #1b908f;
+  margin-bottom: 5px;
+}
+
+.date-time p {
+  margin: 0;
+}
+
+.calibration-popup input {
+  width: 15%;
+  font-size: 150%;
+  color: #1b908f;
+  background: transparent;
+  border: 2px #1b908f solid;
+  border-radius: 5px;
+  display: block;
+  margin: 10px auto;
+}
+
+.page i {
+  margin: auto;
+}
