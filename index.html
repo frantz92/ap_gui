@@ -21,13 +21,13 @@
         </div>
         <p id="battery-level">...</p>
       </div>
-      <button href="#live"><i class="far fa-circle"></i> Live</button>
-      <button class="button-database" href="#database"><i class="fas fa-database"></i> Database</button>
-      <button href="#settings"><i class="fas fa-tools"></i> Settings</button>
+      <button href="#live" type="button"><i class="far fa-circle"></i> Live</button>
+      <button class="button-database" href="#database" type="button"><i class="fas fa-database"></i> Database</button>
+      <button href="#settings" type="button"><i class="fas fa-tools"></i> Settings</button>
     </div>
     <section id="live" class="page">
       <h2>Live</h2>
-      <h3 class="device-id"></h3>
+      <h3 class="device-id">DeviceID</h3>
       <div class="live-values-container">
         <div id="thermometer" class="display-value"><i class="fas fa-thermometer-three-quarters"></i>--.-°C</div>
         <div id="hygrometer" class="display-value"><i class="fas fa-smog"></i>--.-%</div>
@@ -48,76 +48,77 @@
     </section>
     <section id="database" class="page">
       <h2>Database</h2>
-      <h3 class="device-id"></h3>
+      <h3 class="device-id">DeviceID</h3>
       <table id="display" class="table">
-        <tr>
-          <th class="time"><i class="fas fa-clock"></i></th>
-          <th class="temp"><i class="fas fa-thermometer-three-quarters"></i></th>
-          <th class="hum"><i class="fas fa-smog"></i></th>
-          <th class="press"><i class="fab fa-cloudscale"></th>
-          <th class="lig"><i class="fas fa-sun"></i></th>
-          <th class="in"><i class="fas fa-tint"></th>
-          <th class="out"><i class="fas fa-tint-slash"></i></th>
-          <th class="wtemp"><i class="fas fa-tint-slash"><i class="fas fa-thermometer-three-quarters"></i></i></th>
-          <th class="ec"><i class="fas fa-tint-slash"><i class="fas fa-thermometer"></i></i></th>
-        </tr>
+        <thead>
+          <tr>
+            <th class="time" scope="col"><i class="fas fa-clock"></i></th>
+            <th class="temp" scope="col"><i class="fas fa-thermometer-three-quarters"></i></th>
+            <th class="hum" scope="col"><i class="fas fa-smog"></i></th>
+            <th class="press" scope="col"><i class="fab fa-cloudscale"></i></th>
+            <th class="lig" scope="col"><i class="fas fa-sun"></i></th>
+            <th class="in" scope="col"><i class="fas fa-tint"></i></th>
+            <th class="out" scope="col"><i class="fas fa-tint-slash"></i></th>
+            <th class="wtemp" scope="col"><i class="fas fa-tint-slash"><i class="fas fa-thermometer-three-quarters"></i></i></th>
+            <th class="ec" scope="col"><i class="fas fa-tint-slash"><i class="fas fa-thermometer"></i></i></th>
+          </tr>
+        </thead>
         <tbody id="database-table">
         </tbody>
       </table>
     </section>
     <section id="settings" class="page">
       <h2>Settings</h2>
-      <h3 class="device-id"></h3>
+      <h3 class="device-id">DeviceID</h3>
       <div class="settings-list">
-        <button id="download-database" class="settings-button"><i class="fas fa-file-download"></i> Download database</button>
-        <button id="delete-database" class="settings-button"><i class="far fa-trash-alt"></i> Delete database</button>
-        <button id="restart-device" class="settings-button"><i class="fas fa-sync"></i> Restart device</button>
-        <button id="calibrate-device" class="settings-button"><i class="fas fa-ruler-combined"></i> Calibrate device</button>
+        <button id="download-database" class="settings-button" type="button"><i class="fas fa-file-download"></i> Download database</button>
+        <button id="delete-database" class="settings-button" type="button"><i class="far fa-trash-alt"></i> Delete database</button>
+        <button id="restart-device" class="settings-button" type="button"><i class="fas fa-sync"></i> Restart device</button>
+        <button id="calibrate-device" class="settings-button" type="button"><i class="fas fa-ruler-combined"></i> Calibrate device</button>
       </div>
       <div id="conf-download-database" class="confirmation-popup">
         <h3>Confirm</h3>
         <p class="message">Downloading the database will NOT erase the data on SD card.</p>
-        <button><i class="far fa-times-circle answer-no"></i></button>
-        <button><i id="aff-download-database" class="far fa-check-circle answer-yes"></i></button>
+        <button type="button"><i class="far fa-times-circle answer-no"></i></button>
+        <button type="button"><i id="aff-download-database" class="far fa-check-circle answer-yes"></i></button>
       </div>
       <div id="conf-delete-database" class="confirmation-popup">
         <h3>Confirm</h3>
-        <p class="message">Deleting the database will erase all the data on SD card.</br>This action cannot be undone.</p>
-        <button><i class="far fa-times-circle answer-no"></i></button>
-        <button><i id="aff-delete-database" class="far fa-check-circle answer-yes"></i></button>
+        <p class="message">Deleting the database will erase all the data on SD card.<br>This action cannot be undone.</p>
+        <button type="button"><i class="far fa-times-circle answer-no"></i></button>
+        <button type="button"><i id="aff-delete-database" class="far fa-check-circle answer-yes"></i></button>
       </div>
       <div id="conf-restart-device" class="confirmation-popup">
         <h3>Confirm</h3>
-        <p class="message">Restarting the device will NOT erase the data.</br>After this action You need to wait few moments to reconnect.</br>This action cannot be undone.</p>
-        <button><i class="far fa-times-circle answer-no"></i></button>
-        <button><i id="aff-restart-device" class="far fa-check-circle answer-yes"></i></button>
+        <p class="message">Restarting the device will NOT erase the data.<br>After this action You need to wait few moments to reconnect.<br>This action cannot be undone.</p>
+        <button type="button"><i class="far fa-times-circle answer-no"></i></button>
+        <button type="button"><i id="aff-restart-device" class="far fa-check-circle answer-yes"></i></button>
       </div>
       <div id="choose-calibrate-device" class="choose-popup">
         <h3>Sensor</h3>
         <p class="message">Choose the sensor to calibrate</p>
-        <button><i class="far fa-times-circle answer-no"></i></button>
-        <button><i id="calibrate-luxometer" class="fas fa-sun option cal-luxometer"></i></button>
-        <button><i id="calibrate-ec" class="fas fa-thermometer option cal-thermometer"></i></button>
+        <button type="button"><i class="far fa-times-circle answer-no"></i></button>
+        <button type="button"><i id="calibrate-luxometer" class="fas fa-sun option cal-luxometer"></i></button>
+        <button type="button"><i id="calibrate-ec" class="fas fa-thermometer option cal-thermometer"></i></button>
       </div>
       <div id="cal-calibrate-luxometer" class="calibration-popup">
         <h3>Luxometer</h3>
-        <p class="message">Place the external luxometer next to the device and measure the light</br>pointing at the same direction as the sensor of the device is directed.</br> Be carefull not to shadow the device neither the external luxometer!</br></br>Write the reading below and click next.</p>
+        <p class="message">Place the external luxometer next to the device and measure the light<br>pointing at the same direction as the sensor of the device is directed.<br> Be carefull not to shadow the device neither the external luxometer!<br><br>Write the reading below and click next.</p>
         <!-- <input type="number" id="ext-val-lux" class="external-value-luxometer" placeholder="00.00"> -->
         <p class="analog-calibrate-luxometer">...</p>
-        <button><i class="far fa-times-circle answer-no"></i></button>
-        <!-- <button><i id="aff-calibrate-luxometer" class="far fa-check-circle answer-yes"></i></button> -->
+        <button type="button"><i class="far fa-times-circle answer-no"></i></button>
+        <!-- <button type="button"><i id="aff-calibrate-luxometer" class="far fa-check-circle answer-yes"></i></button> -->
       </div>
       <div id="cal-calibrate-ec" class="calibration-popup">
         <h3>EC meter</h3>
-        <p class="message">Pour at least 100ml of the liquid into the outer tank.</br>The EC meter calibration takes about 1 minute.</br>It can be required to repeat the measurments.</br></br>Write the PH of the poured liquid and click next.</p>
+        <p class="message">Pour at least 100ml of the liquid into the outer tank.<br>The EC meter calibration takes about 1 minute.<br>It can be required to repeat the measurments.<br><br>Write the PH of the poured liquid and click next.</p>
         <!-- <input type="number" id="ext-val-ec" class="external-value-ec" placeholder="00.00"> -->
         <p class="analog-calibrate-ec">...</p>
-        <button><i class="far fa-times-circle answer-no"></i></button>
-        <!-- <button><i id="aff-calibrate-ec" class="far fa-check-circle answer-yes"></i></button> -->
+        <button type="button"><i class="far fa-times-circle answer-no"></i></button>
+        <!-- <button type="button"><i id="aff-calibrate-ec" class="far fa-check-circle answer-yes"></i></button> -->
       </div>
     </section>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="js/script.js"></script>
   </body>
-
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="js/script.js"></script>
 </html>
