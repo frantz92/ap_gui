@@ -1,5 +1,6 @@
-html, body {
-  background-image: linear-gradient( #2a2a2b, #3e3e40);
+html,
+body {
+  background-image: linear-gradient(#2a2a2b, #3e3e40);
   font-family: Verdana, sans-serif;
   background-size: cover;
   margin: 0;
@@ -24,7 +25,7 @@ html, body {
 }
 
 .loader.show {
-  opacity: .7;
+  opacity: 0.7;
   visibility: visible;
 }
 
@@ -43,18 +44,19 @@ section {
   box-sizing: border-box;
 }
 
-h2, h3 {
+h2,
+h3 {
   font-family: Verdana, sans-serif;
   text-align: center;
   color: #1b908f;
 }
 
 .page {
-    display: none;
+  display: none;
 }
 
 .page.active {
-    display: block;
+  display: block;
 }
 
 .main-nav {
@@ -91,6 +93,11 @@ h2, h3 {
   left: 40%;
 }
 
+.page button {
+  background-color: transparent;
+  border: none;
+}
+
 .main-nav button,
 .page .settings-list button {
   height: 10vw;
@@ -107,7 +114,7 @@ h2, h3 {
 .page .settings-list button:hover {
   background-color: #1b908f;
   color: black;
-  transition: .5s ease-out;
+  transition: 0.5s ease-out;
 }
 
 .fa-circle {
@@ -119,9 +126,11 @@ h2, h3 {
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -137,7 +146,9 @@ h2, h3 {
   background-color: transparent;
 }
 
-.table tr, th, td {
+.table tr,
+th,
+td {
   border: 0.25px black dashed;
 }
 
@@ -159,12 +170,15 @@ h2, h3 {
   margin-right: 10px;
 }
 
-.fa-thermometer-three-quarters, .fa-tint-slash, .fa-thermometer-half {
+.fa-thermometer-three-quarters,
+.fa-tint-slash,
+.fa-thermometer-half {
   color: rgb(249, 89, 94);
   margin-right: 2.5px;
 }
 
-.fa-smog, .fa-tint {
+.fa-smog,
+.fa-tint {
   color: rgb(120, 182, 231);
   margin-right: 2.5px;
 }
@@ -174,7 +188,8 @@ h2, h3 {
   margin-right: 2.5px;
 }
 
-.fa-sun, .fa-thermometer {
+.fa-sun,
+.fa-thermometer {
   color: rgb(229, 210, 105);
   margin-right: 2.5px;
 }
@@ -185,7 +200,9 @@ h2, h3 {
   margin-top: 6vh;
 }
 
-.confirmation-popup, .choose-popup, .calibration-popup {
+.confirmation-popup,
+.choose-popup,
+.calibration-popup {
   position: relative;
   width: 60vw;
   border: 2px #1b908f solid;
@@ -197,11 +214,10 @@ h2, h3 {
   display: none;
 }
 
-.page button {
-  background-color: transparent;
-  border: none;
-}
-.answer-no, .answer-yes, .cal-luxometer, .cal-thermometer {
+.answer-no,
+.answer-yes,
+.cal-luxometer,
+.cal-thermometer {
   border: none;
   background: transparent;
   padding: 0;
@@ -222,7 +238,8 @@ h2, h3 {
   color: red;
   opacity: 0.6;
 }
-.page .answer-yes{
+
+.page .answer-yes {
   color: green;
   opacity: 1;
 }
