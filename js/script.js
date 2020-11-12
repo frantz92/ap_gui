@@ -328,35 +328,44 @@ const chartWaterParams = new Highcharts.Chart({
   }],
 });
 
+
+let i = 0;
+let l = 0;
 /* Timer */
 // Every 5 sec upload data from device
 setInterval(function updateData() {
   const xhttp = new XMLHttpRequest();
+  xhttp.responseType = 'json';
   xhttp.onreadystatechange = function() {
+    if (this.status == 404) {
+      i = 0;
+    }
     if (this.readyState == 4 && this.status == 200) {
-      const data = this.responseText; // request the data string
+      const data = this.response; // request the data string
+      console.log(data);
       displayData(data); // start function of displaying the recived data
+      i++;
+      l++;
     }
   };
-  xhttp.open('GET', '/data', true);
+  xhttp.open('GET', `http://localhost:3131/weather/${i}`, true);
   xhttp.send();
-}, 5000);
+}, 1000);
 
 /** Displaying
   * @param {data} data written in table
 */
 function displayData(data) {
-  const today = Date.now() + 7200000; // update the time and date
-  data = data.split(','); // splitting the data
+  const today = Date.now() + 3600000; // update the time and date
   const dataToDisplay = [
-    `<i class='fas fa-thermometer-three-quarters'></i>${parseFloat(data[2])}°C`,
-    `<i class='fas fa-smog'></i>${parseFloat(data[3])}%`,
-    `<i class='fab fa-cloudscale'></i>${parseFloat(data[4])}hPa`,
-    `<i class='fas fa-sun'></i>${parseFloat(data[5])}lux`,
-    `<i class='fas fa-tint'></i>${parseFloat(data[6])}ml`,
-    `<i class='fas fa-tint-slash'></i>${parseFloat(data[7])}ml`,
-    `<i class='fas fa-thermometer-half'></i>${parseFloat(data[8])}°C`,
-    `<i class='fas fa-thermometer'></i>${parseFloat(data[9])}mS/cm`];
+    `<i class='fas fa-thermometer-three-quarters'></i>${parseFloat(data[Object.keys(data)[1]])}°C`,
+    `<i class='fas fa-smog'></i>${parseFloat(data[Object.keys(data)[2]])}%`,
+    `<i class='fab fa-cloudscale'></i>${parseFloat(data[Object.keys(data)[3]])}hPa`,
+    `<i class='fas fa-sun'></i>${parseFloat(data[Object.keys(data)[4]])}lux`,
+    `<i class='fas fa-tint'></i>${parseFloat(data[Object.keys(data)[5]])}ml`,
+    `<i class='fas fa-tint-slash'></i>${parseFloat(data[Object.keys(data)[6]])}ml`,
+    `<i class='fas fa-thermometer-half'></i>${parseFloat(data[Object.keys(data)[7]])}°C`,
+    `<i class='fas fa-thermometer'></i>${parseFloat(data[Object.keys(data)[8]])}mS/cm`];
   const dataToFind = [
     'thermometer',
     'hygrometer',
@@ -371,44 +380,45 @@ function displayData(data) {
     'time',
   ];
   // Weather chart (Temperature, Humidity, Pressure, Light)
+
   for (let i=0; i<=3; i++) {
-    // data length 3h
-    if (chartWeather.series[i].data.length > 8640) {
+    if (l < 50) {
       chartWeather.series[i].addPoint([
         today,
-        parseFloat(data[i+2])],
+        parseFloat(data[Object.keys(data)[i+1]])],
       true,
-      true,
+      false,
       true,
       );
     } else {
       chartWeather.series[i].addPoint([
         today,
-        parseFloat(data[i+2])],
+        parseFloat(data[Object.keys(data)[i+1]])],
       true,
-      false,
+      true,
       true,
       );
     }
+
     const valueToDisplay = document.getElementById(dataToFind[i]);
     valueToDisplay.innerHTML = dataToDisplay[i];
   }
   // Waterflow chart (Water In and Out)
   for (let i=0; i<=1; i++) {
-    if (chartWaterFlow.series[i].data.length > 8640) {
+    if (l < 50) {
       chartWaterFlow.series[i].addPoint([
         today,
-        parseFloat(data[i+6])],
+        parseFloat(data[Object.keys(data)[i+5]])],
       true,
-      true,
+      false,
       true,
       );
     } else {
       chartWaterFlow.series[i].addPoint([
         today,
-        parseFloat(data[i+6])],
+        parseFloat(data[Object.keys(data)[i+5]])],
       true,
-      false,
+      true,
       true,
       );
     }
@@ -417,20 +427,20 @@ function displayData(data) {
   }
   // Water parameters chart (EC, Water temperature)
   for (let i=0; i<=1; i++) {
-    if (chartWaterParams.series[i].data.length > 8640) {
+    if (l < 50) {
       chartWaterParams.series[i].addPoint([
         today,
-        parseFloat(data[i+8])],
+        parseFloat(data[Object.keys(data)[i+7]])],
       true,
-      true,
+      false,
       true,
       );
     } else {
       chartWaterParams.series[i].addPoint([
         today,
-        parseFloat(data[i+8])],
+        parseFloat(data[Object.keys(data)[i+7]])],
       true,
-      false,
+      true,
       true,
       );
     }
