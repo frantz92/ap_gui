@@ -362,15 +362,15 @@ setInterval(function updateData() {
     }
     if (this.readyState == 4 && this.status == 200) {
       const data = this.response; // request the data string
-      console.log(data);
       displayData(data); // start function of displaying the recived data
+      saveDatabase(data);
       i++;
       l++;
     }
   };
   xhttp.open('GET', `http://localhost:3131/weather/${i}`, true);
   xhttp.send();
-}, 1000);
+}, 5000);
 
 /** Displaying
   * @param {data} data written in table
@@ -495,54 +495,25 @@ function displayData(data) {
 }
 
 // Upload database every 1 minute (buffer.csv)
-setInterval(function updateDatabase() {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      const data = this.responseText; // request reponse (data string)
-      // check if data is not empty
-      if (data != '') {
-        saveDatabase(data); // start saving database
-      }
-    }
-  };
-  xhttp.open('GET', '/database', true);
-  xhttp.send();
-}, 60000);
+
 /** Automaticly after update database save it to localStorage
   * @param {data} data written in table
 */
 function saveDatabase(data) {
   // check if there is in local storage item database if not then create it
-  const database = localStorage.getItem('Database') ?
-   JSON.parse(localStorage.getItem('Database')) : [];
-
-  const databaseArray = data.split('\n'); // split data in rows
-  for (dataRow of databaseArray) {
-    // check if data isn't empty
-    if (dataRow != '') {
-      database.push(dataRow); // save row by row in local storage
-      localStorage.setItem('Database', JSON.stringify(database));
-    }
-  }
-  deleteBuffer(); // start deleting the buffer.csv file in SD card
+  const database = localStorage.getItem('Database') ? JSON.parse(localStorage.getItem('Database')) : [];
+  database.push(data);
+  localStorage.setItem('Database', JSON.stringify(database));
 }
-/** Automaticly after saving databse send command
+/** Automaticly after saving database send command
   to delete buffer.csv from the SD Card
 **/
-function deleteBuffer() {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      const confirmation = this.responseText; // request response
-      console.log(confirmation);
-    }
-  };
-  xhttp.open('GET', '/delete_buffer', true);
-  xhttp.send();
-}
+
 /** Create database table after clicking on 'Database' button **/
 function createDatabaseTable() {
+  const d = new Date();
+  let hour = d.getHours()-1;
+  let minute = 0;
   const table = document.getElementById('database-table');
   table.innerHTML = ''; // clear the table
   // save in constant the database saved in local storage
@@ -550,23 +521,27 @@ function createDatabaseTable() {
   // check if something is saved in local storage
   if (databaseArray != null) {
     databaseArray.forEach((row) => {
-      const dataRow = row.split(','); // split every data seperately
-      dataRow[1] = dataRow[1].slice(0, -3); // delete the seconds in timeout
-      // check if time is correctly saved
-      if (dataRow[1] != undefined) {
-        const data = `<tr>
-                        <td>${dataRow[1]}</td>
-                        <td>${dataRow[2]}</td>
-                        <td>${dataRow[3]}</td>
-                        <td>${dataRow[4]}</td>
-                        <td>${dataRow[5]}</td>
-                        <td>${dataRow[6]}</td>
-                        <td>${dataRow[7]}</td>
-                        <td>${dataRow[8]}</td>
-                        <td>${dataRow[9]}</td>
-                      </tr>`;
-        table.innerHTML += data; // add data to each cell
+      if (minute < 10) {
+        minute = '0' + minute.toString();
       }
+      if (minute >= 60) {
+        hour ++;
+        minute = '00';
+      }
+      // check if time is correctly saved
+      const data = `<tr>
+                      <td>${hour + ':' + (minute.toString())}</td>
+                      <td>${row[Object.keys(row)[1]]}</td>
+                      <td>${row[Object.keys(row)[2]]}</td>
+                      <td>${row[Object.keys(row)[3]]}</td>
+                      <td>${row[Object.keys(row)[4]]}</td>
+                      <td>${row[Object.keys(row)[5]]}</td>
+                      <td>${row[Object.keys(row)[6]]}</td>
+                      <td>${row[Object.keys(row)[7]]}</td>
+                      <td>${row[Object.keys(row)[8]]}</td>
+                    </tr>`;
+      table.innerHTML += data; // add data to each cell
+      minute ++;
     });
   }
   // If the table is created, remove the loader gif page
