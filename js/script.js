@@ -364,7 +364,7 @@ setInterval(function updateData() {
       const data = this.response; // request the data string
       displayData(data); // start function of displaying the recived data
       saveDatabase(data);
-      createDatabaseTable();
+      // createDatabaseTable();
       i++;
       l++;
     }
@@ -488,6 +488,7 @@ function displayData(data) {
   if (data.bat <= 15) {
     // if battery level is lower than 15% than color the battery red
     batteryLevel.style.background = '#FE5757';
+    valueToDisplay.style.color = '#FE5757';
   } else {
     batteryLevel.style.background = '#1b908f'; // default battery color black
   }
@@ -618,6 +619,7 @@ function activePage(id) {
 function refreshPage() {
   const loader = document.querySelector('.loader');
   loader.classList.add('show');
+  deleteDatabase();
   // if off, wait 5 seconds, if on update automaticly after refreshing the page
   const xhttp = new XMLHttpRequest();
   xhttp.responseType = 'json';
@@ -698,7 +700,7 @@ function calibrationPopup(choosenSetting) {
     document.querySelector(`div[id='cal-${choosenSetting}'] input`);
 
   // Temporarly displaying the analog reads from the selected calibrated device
-  const analogRead = document.querySelector(`.analog-${choosenSetting}`);
+  // const analogRead = document.querySelector(`.analog-${choosenSetting}`);
 
   selectedPopup.style.display = 'block';
 
