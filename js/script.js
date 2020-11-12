@@ -1,4 +1,4 @@
-/* eslint-disable no-invalid-this */
+/* eslint-disable no-invalid-this, max-len */
 
 /*  Weather Chart */
 const chartWeather = new Highcharts.Chart({
@@ -329,6 +329,26 @@ const chartWaterParams = new Highcharts.Chart({
 });
 
 
+/** Upload the device ID saved on SD card
+**/
+function checkId() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.responseType = 'json';
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      const device = this.response; // request device ID from SD Card
+      console.log('Device ID: ', device.name); // logging the device ID
+      const deviceIds = document.querySelectorAll('.device-id');
+      deviceIds.forEach((deviceId) => {
+        // display the device ID in html (up top of the page)
+        deviceId.innerHTML = device.name;
+      });
+    }
+  };
+  xhttp.open('GET', 'http://localhost:3131/device/0', true);
+  xhttp.send();
+}
+
 let i = 0;
 let l = 0;
 /* Timer */
@@ -629,25 +649,6 @@ function refreshPage() {
   // off, 60seconds the database is uploded/on automaticly(can cause bugs!)
   // updateDatabase();
   loader.classList.remove('show');
-}
-
-/** Upload the device ID saved on SD card
-**/
-function checkId() {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      const deviceName = this.responseText; // request device ID from SD Card
-      console.log('Device ID: ', deviceName); // logging the device ID
-      const deviceIds = document.querySelectorAll('.device-id');
-      deviceIds.forEach((deviceId) => {
-        // display the device ID in html (up top of the page)
-        deviceId.innerHTML = deviceName;
-      });
-    }
-  };
-  xhttp.open('GET', '/id', true);
-  xhttp.send();
 }
 
 // The refresh page always active (if refreshing or opening site)
