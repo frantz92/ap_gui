@@ -364,13 +364,14 @@ setInterval(function updateData() {
       const data = this.response; // request the data string
       displayData(data); // start function of displaying the recived data
       saveDatabase(data);
+      createDatabaseTable();
       i++;
       l++;
     }
   };
   xhttp.open('GET', `http://localhost:3131/weather/${i}`, true);
   xhttp.send();
-}, 5000);
+}, 2000);
 
 /** Displaying
   * @param {data} data written in table
@@ -591,7 +592,7 @@ for (const link of this.navLinks) {
           } else {
             confirmationPopup(this.id);
           }
-        }, {once: true});
+        });
       });
     }
   });
@@ -618,6 +619,22 @@ function refreshPage() {
   const loader = document.querySelector('.loader');
   loader.classList.add('show');
   // if off, wait 5 seconds, if on update automaticly after refreshing the page
+  const xhttp = new XMLHttpRequest();
+  xhttp.responseType = 'json';
+  xhttp.onreadystatechange = function() {
+    if (this.status == 404) {
+      i = 0;
+    }
+    if (this.readyState == 4 && this.status == 200) {
+      const data = this.response; // request the data string
+      displayData(data); // start function of displaying the recived data
+      saveDatabase(data);
+      i++;
+      l++;
+    }
+  };
+  xhttp.open('GET', `http://localhost:3131/weather/${i}`, true);
+  xhttp.send();
   // updateData();
   activePage('live'); // First page (Charts) after refresh
   checkId(); // upload the device id
@@ -669,16 +686,16 @@ function choosePopup(choosenSetting) {
 **/
 function calibrationPopup(choosenSetting) {
   let time; // Time interval neede to not multiplicate the function
-  /* const wholePage =
-    document.querySelector('body > div:not(.confirmation-popup)'); */
-  /* const settingsList =  document.querySelector('.settings-list') */
+  const wholePage =
+    document.querySelector('body > div:not(.confirmation-popup)');
+  const settingsList = document.querySelector('.settings-list');
   const selectedPopup = document.getElementById(`cal-${choosenSetting}`);
   const negativeAnswer =
     document.querySelector(`div[id='cal-${choosenSetting}'] .answer-no`);
-  /* const positiveAnswer =
-    document.querySelector(`div[id='cal-${choosenSetting}'] .answer-yes`); */
-  /* const input =
-    document.querySelector(`div[id='cal-${choosenSetting}'] input`); */
+  const positiveAnswer =
+    document.querySelector(`div[id='cal-${choosenSetting}'] .answer-yes`);
+  const input =
+    document.querySelector(`div[id='cal-${choosenSetting}'] input`);
 
   // Temporarly displaying the analog reads from the selected calibrated device
   const analogRead = document.querySelector(`.analog-${choosenSetting}`);
@@ -695,18 +712,18 @@ function calibrationPopup(choosenSetting) {
   });
 
   // Start the calibration function (send info to the device, display on screen)
-  /* positiveAnswer.addEventListener('click', function(event){
+  positiveAnswer.addEventListener('click', function(event) {
     event.preventDefault();
-    if(input.value.length > 0) {
+    if (input.value.length > 0) {
       settingAction(this.id);
       selectedPopup.style.display = 'none';
       wholePage.style.display = 'block';
       settingsList.style.display = 'block';
     }
-  }, {once: true}); */
+  }, {once: true});
 
   // Temporarly - request for analog readings
-  if (selectedPopup.style.display = 'block') {
+  /* if (selectedPopup.style.display = 'block') {
     time = setInterval(() => {
       const xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -719,7 +736,7 @@ function calibrationPopup(choosenSetting) {
       xhttp.open('GET', `${choosenSetting}`, true);
       xhttp.send();
     }, 1000);
-  }
+  } */
 }
 
 /** Confirmation popup (select 'Yes' or 'No')
@@ -771,7 +788,7 @@ function settingAction(action) {
 
 /** Send command to delete the database from SD card **/
 function deleteDatabase() {
-  const xhttp = new XMLHttpRequest();
+  /* const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       const confirmation = this.responseText; // request for response
@@ -786,12 +803,14 @@ function deleteDatabase() {
     }
   };
   xhttp.open('GET', '/delete_database', true);
-  xhttp.send();
+  xhttp.send(); */
+  localStorage.clear(); // deleting the local storage
+  console.log('Database: deleted!'); // logging the confirmation
 }
 
 /** Send command to download the database from SD card (without deleting it!)**/
 function downloadDatabase() {
-  const xhttp = new XMLHttpRequest();
+  /* const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       // '_blank' needed for not opening another page
@@ -807,12 +826,13 @@ function downloadDatabase() {
     }
   };
   xhttp.open('GET', '/download_database', true);
-  xhttp.send();
+  xhttp.send(); */
+  console.log('Database: downloaded!');
 }
 
 /** Send command to restart the device **/
 function restartDevice() {
-  const xhttp = new XMLHttpRequest();
+  /* const xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       const confirmation = this.responseText; // request confirmation
@@ -826,5 +846,9 @@ function restartDevice() {
     }
   };
   xhttp.open('GET', '/restart_device', true);
-  xhttp.send();
+  xhttp.send(); */
+  console.log('Device: restarting!');
+  setTimeout(function() {
+    location.reload();
+  }, 1000);
 }
