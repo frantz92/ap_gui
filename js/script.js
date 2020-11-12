@@ -462,15 +462,16 @@ function displayData(data) {
   // Display Battery percentage
   valueToDisplay = document.getElementById(dataToFind[8]);
   // adding battery level value to html
-  valueToDisplay.innerHTML = parseFloat(data[10]) + '%';
-  if (parseInt(data[10]) <= 15) {
+  valueToDisplay.innerHTML = data.bat + '%';
+  const batteryLevel = document.querySelector('.battery-level');
+  if (data.bat <= 15) {
     // if battery level is lower than 15% than color the battery red
-    valueToDisplay.style.color = 'red';
+    batteryLevel.style.background = '#FE5757';
   } else {
-    valueToDisplay.style.color = 'black'; // default battery color black
+    batteryLevel.style.background = '#1b908f'; // default battery color black
   }
   valueToDisplay = document.querySelector('.'+dataToFind[8]);
-  valueToDisplay.style.width = parseFloat(data[10]);
+  batteryLevel.style.width = data.bat + '%';
 }
 
 // Upload database every 1 minute (buffer.csv)

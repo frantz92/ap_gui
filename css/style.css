@@ -85,9 +85,11 @@ h3 {
 
 .battery-level {
   background-color: #1b908f;
-  height: 100%;
-  border-radius: 10%;
+  height: 105%;
+  border-radius: 20%;
   position: relative;
+  top: -2.5%;
+  z-index: -1;
 }
 
 .battery-cover p {
