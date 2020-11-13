@@ -276,3 +276,135 @@ td {
 .page i {
   margin: auto;
 }
+
+.sim-info {
+  min-height: 100%;
+  height: auto !important;
+  width: 100%;
+  position: fixed;
+  margin: 0;
+  padding-top: 2%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 100;
+  background-color: transparent;
+  opacity: 1;
+  color: #65FDEB;
+  cursor: default;
+  opacity: 0;
+  animation: showInfo 1.5s 1s ease-out forwards;
+}
+
+@keyframes showInfo {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.sim-info::before {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  content: ' ';
+  top: 0;
+  left: 0;
+  margin: 0;
+  z-index: -1;
+  filter: blur(10px);
+  background: #1b908f;
+  opacity: 0.85;
+}
+
+.sim-info .exit {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  color: rgb(249, 89, 94);
+  font-size: 70px;
+  transform: scale(1);
+  transition-duration: 0.5s;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.sim-info .exit:hover {
+  transform: scale(1.2);
+}
+
+.project-scheme {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 10vh 0;
+  padding: 0 10vh;
+  opacity: 0.9;
+  justify-content: center;
+}
+
+.part-one {
+  display: inline-flex;
+}
+
+.part-two {
+  display: flex;
+  flex-direction: column;
+}
+
+div[class^="img-"] {
+  transform: scale(1);
+  transition-duration: 1s;
+  position: relative;
+  cursor: pointer;
+}
+
+div[class^="img-"] img {
+  transition-duration: 1s;
+}
+
+div[class^="img-"] p {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  opacity: 0;
+  transition-duration: 1s;
+  color: #65FDEB;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+div[class^="img-"] p::-webkit-scrollbar {
+  display: none;
+}
+
+div[class^="img-"]:hover {
+  transform: scale(1.1);
+  border: solid #65FDEB 1px;
+}
+
+div[class^="img-"]:hover img {
+  opacity: 0.5;
+}
+
+div[class^="img-"]:hover p {
+  opacity: 1;
+}
+
+.img-user,
+.img-database {
+  height: 50%;
+  top: 0;
+}
+
+.img-database {
+  top: -5px;
+}

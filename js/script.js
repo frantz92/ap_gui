@@ -24,7 +24,7 @@ The project was made by Patryk Frankowski
 on commission of AHEAD sp. z o.o. company.
 **/
 
-/* eslint-disable no-invalid-this, max-len */
+/* eslint-disable no-invalid-this, max-len, no-unused-vars */
 
 /**  Weather Chart **/
 const chartWeather = new Highcharts.Chart({
@@ -683,6 +683,7 @@ function choosePopup(choosenSetting) {
   const selectedPopup = document.getElementById(`choose-${choosenSetting}`);
   const negativeAnswer = document.querySelector(`div[id='choose-${choosenSetting}'] .answer-no`);
   const selectedOptions = document.querySelectorAll(`div[id='choose-${choosenSetting}'] .option`);
+  const infoDiv = document.querySelector('.sim-info');
 
   selectedPopup.style.display = 'block';
 
@@ -693,6 +694,7 @@ function choosePopup(choosenSetting) {
     selectedPopup.style.display = 'none';
     wholePage.style.display = 'block';
     settingsList.style.display = 'block';
+    infoDiv.style.display = 'none';
     return;
   }, {once: true});
 
@@ -702,6 +704,7 @@ function choosePopup(choosenSetting) {
       e.preventDefault();
       selectedPopup.style.display = 'none';
       calibrationPopup(this.id);
+      infoDiv.style.display = 'none';
     });
   });
 }
@@ -717,6 +720,7 @@ function calibrationPopup(choosenSetting) {
   const negativeAnswer = document.querySelector(`div[id='cal-${choosenSetting}'] .answer-no`);
   const positiveAnswer = document.querySelector(`div[id='cal-${choosenSetting}'] .answer-yes`);
   const input = document.querySelector(`div[id='cal-${choosenSetting}'] input`);
+  const infoDiv = document.querySelector('.sim-info');
 
   /* Temporarly tests- displaying the analog reads from the selected calibrated device */
   // const analogRead = document.querySelector(`.analog-${choosenSetting}`);
@@ -729,6 +733,7 @@ function calibrationPopup(choosenSetting) {
     selectedPopup.style.display = 'none';
     const showPopup = document.querySelector('.choose-popup');
     showPopup.style.display = 'block';
+    infoDiv.style.display = 'none';
     return;
   });
 
@@ -740,6 +745,7 @@ function calibrationPopup(choosenSetting) {
       selectedPopup.style.display = 'none';
       wholePage.style.display = 'block';
       settingsList.style.display = 'block';
+      infoDiv.style.display = 'none';
     }
   }, {once: true});
 
@@ -769,6 +775,7 @@ function confirmationPopup(choosenSetting) {
   const selectedPopup = document.getElementById(`conf-${choosenSetting}`);
   const negativeAnswer = document.querySelector(`div[id='conf-${choosenSetting}'] .answer-no`);
   const positiveAnswer = document.querySelector(`div[id='conf-${choosenSetting}'] .answer-yes`);
+  const infoDiv = document.querySelector('.sim-info');
 
   selectedPopup.style.display = 'block';
   /* If the answer is negative then display everything back (canceled) */
@@ -777,6 +784,7 @@ function confirmationPopup(choosenSetting) {
     selectedPopup.style.display = 'none';
     wholePage.style.display = 'block';
     settingsList.style.display = 'block';
+    infoDiv.style.display = 'none';
   }, {once: true});
   /* If positive answer then start the choosen calibration function */
   positiveAnswer.addEventListener('click', function(e) {
@@ -785,6 +793,7 @@ function confirmationPopup(choosenSetting) {
     selectedPopup.style.display = 'none';
     wholePage.style.display = 'block';
     settingsList.style.display = 'block';
+    infoDiv.style.display = 'none';
   }, {once: true});
 }
 
@@ -838,4 +847,10 @@ function restartDevice() {
   setTimeout(function() {
     location.reload();
   }, 1000);
+}
+
+/** Close the "About the project" info (GUI simulation only) **/
+function closeInfo() {
+  const infoDiv = document.querySelector('.sim-info');
+  infoDiv.style.display = 'none';
 }

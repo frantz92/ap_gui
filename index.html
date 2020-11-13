@@ -8,6 +8,71 @@
     <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   </head>
   <body>
+    <div class="sim-info">
+      <button class="exit" onclick="closeInfo()"><i class="far fa-times-circle"></i></button>
+      <h1>About the project</h1>
+      <p>
+        The project goal is to give feedback to the user about the best watering management plan.<br>
+      </p>
+      <div class="project-scheme">
+        <div class="part-one">
+          <div class="img-device">
+            <img src="images/device.png" alt="device">
+            <p>
+              The device was designed and built in order to measure parameters such as:<br>
+              -air temperature, humidity and pressure<br>
+              -sunlight energy (measuring time)<br>
+              -the amount of water used for watering<br>
+              -the amount, temperature and electrical conducticity of water that didn't get absorbed by the soil<br><br>
+              All initialization info<br>
+              (device ID, IP, WiFi SSID etc.)<br>
+              are saved in built-in SD card.<br><br>
+              The colected data is automaticly backed up on SD card.<br><br>
+              The whole device is powered by a li-ion battery supported by solar panels.
+            </p>
+          </div>
+          <div class="img-connect">
+            <img src="images/connection.png" alt="connection">
+            <p>
+              Through the presented GUI the user can observe the actual state<br>
+              of the selected plantation area, where the device is placed<br>
+              and also send some commands such as: restarting the device or deleting the database<br><br>
+              The built-in WiFi module allows to connect the device wirelessly.<br><br>
+              The device also automaticly sends collected data to the database.<br>
+            </p>
+          </div>
+        </div>
+        <div class="part-two">
+          <div class="img-user">
+            <img src="images/user.png" alt="user">
+            <p>
+              By selecting the specific device (by ID or IP) the user can observe the current weather conditions on the plantation.<br><br>
+              The received plan of watering calculated by the AI algorythms allows the user to confront his own knowledge with proposed vegetation management.
+            </p>
+          </div>
+          <div class="img-database">
+            <img src="images/database.png" alt="database">
+            <p>
+              The SQL/PHP based database collects the data from all of the devices placed on the plantation.<br><br>
+              The database can be real-time analyzed by the user and also all the data is used<br>
+              to calculate the AI algorythms (via Microsoft Azure Machine Learning Studio).<br><br>
+              Using the colected data from the devices and of the weather outside the plantation<br>
+              the system is able to predict the flora growth and fruictification<br>
+              that is how it calculates and suggest the optimized watering plan to the user.
+            </p>
+          </div>
+        </div>
+      </div>
+      <p>
+        This website is a simulation of a GUI representing one of the devices used in project.<br>
+        The shown data is is saved in local JSON-server based database.<br>
+        Normally, after entering this website a request is automaticly sent to the device,<br>
+        which at the same time is measuring the surrounding weather conditions<br>
+        and send back the informations about the actual state<br>
+        as the previous datas (in chunks) saved on the built-in SD card.<br><br>
+        All the commands in the 'Settings' section are shut down (due to lack of connection with the device).
+      </p>
+    </div>
     <div class="loader">
       <img src="images/loading.gif" alt="loading">
     </div>
