@@ -289,8 +289,7 @@ td {
   text-align: center;
   z-index: 100;
   background-color: transparent;
-  opacity: 1;
-  color: #65FDEB;
+  color: #65fdeb;
   cursor: default;
   opacity: 0;
   animation: showInfo 1.5s 1s ease-out forwards;
@@ -376,7 +375,7 @@ div[class^="img-"] p {
   margin: 0;
   opacity: 0;
   transition-duration: 1s;
-  color: #65FDEB;
+  color: #65fdeb;
   overflow-y: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
@@ -388,7 +387,7 @@ div[class^="img-"] p::-webkit-scrollbar {
 
 div[class^="img-"]:hover {
   transform: scale(1.1);
-  border: solid #65FDEB 1px;
+  border: solid #65fdeb 1px;
 }
 
 div[class^="img-"]:hover img {
