@@ -407,3 +407,57 @@ div[class^="img-"]:hover p {
 .img-database {
   top: -5px;
 }
+
+@media only screen and (max-device-width: 767px) {
+  .sim-info {
+    display: none;
+  }
+
+  .container {
+    display: none;
+  }
+  .live-values-container {
+    flex-direction: column;
+    height: 33%;
+    padding-left: 35%;
+    margin: 10% auto;
+    align-items: flex-start;
+  }
+
+  .display-value {
+    margin: 2% 0;
+  }
+
+  .main-nav {
+    width: 25%;
+    height: 50%;
+  }
+
+  .main-nav button {
+    height: 50%;
+    font-size: 80%;
+  }
+
+  .table {
+    position: absolute;
+    left: 50%;
+  }
+
+  .settings-list {
+    width: 33%;
+    margin-top: 20%;
+  }
+
+  .page .settings-list button {
+    height: 100%;
+    font-size: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10%;
+  }
+
+  div[class$="popup"] {
+    margin-top: 50%;
+    margin-left: 25%;
+  }
+}
