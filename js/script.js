@@ -226,7 +226,7 @@ const chartWaterFlow = new Highcharts.Chart({
       fontWeight: 'thick',
     },
   },
-  credits: {enabled: false},
+  credits: { enabled: false },
   plotOptions: {
     line: {
       dataLabels: {
@@ -370,7 +370,7 @@ function refreshPage() {
   /* First data upload (besides interval function) */
   const xhttp = new XMLHttpRequest();
   xhttp.responseType = 'json';
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.status == 404) {
       i = 0; // Restart the database (from id=0)
     }
@@ -382,7 +382,7 @@ function refreshPage() {
       l++;
     }
   };
-  xhttp.open('GET', `http://localhost:3131/weather/${i}`, true);
+  xhttp.open('GET', `https://apguidb.herokuapp.com/weather/${i}`, true);
   xhttp.send();
 
   activePage('live'); // First page (Charts) after refresh
@@ -414,7 +414,7 @@ function activePage(id) {
 function checkId() {
   const xhttp = new XMLHttpRequest();
   xhttp.responseType = 'json';
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       const device = this.response; // Request device ID
       console.log('Device ID: ', device.name); // Logging the device ID
@@ -426,7 +426,7 @@ function checkId() {
       });
     }
   };
-  xhttp.open('GET', 'http://localhost:3131/device/0', true);
+  xhttp.open('GET', 'https://apguidb.herokuapp.com//device/0', true);
   xhttp.send();
 }
 
@@ -434,7 +434,7 @@ function checkId() {
 setInterval(function updateData() {
   const xhttp = new XMLHttpRequest();
   xhttp.responseType = 'json';
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.status == 404) {
       i = 0; // Restart the database (from id=0)
     }
@@ -446,7 +446,7 @@ setInterval(function updateData() {
       l++; // Increase chart width (set to 50 points)
     }
   };
-  xhttp.open('GET', `http://localhost:3131/weather/${i}`, true);
+  xhttp.open('GET', `https://apguidb.herokuapp.com/weather/${i}`, true);
   xhttp.send();
 }, 2000);
 
@@ -480,23 +480,23 @@ function displayData(data) {
     'time',
   ];
   /* Weather chart (Temperature, Humidity, Pressure, Light) */
-  for (let i=0; i<=3; i++) {
+  for (let i = 0; i <= 3; i++) {
     /* If there is more than 50 points on the chart, move the chart */
     if (l < 50) {
       chartWeather.series[i].addPoint([
         today,
-        parseFloat(data[Object.keys(data)[i+1]])],
-      true,
-      false,
-      true,
+        parseFloat(data[Object.keys(data)[i + 1]])],
+        true,
+        false,
+        true,
       );
     } else {
       chartWeather.series[i].addPoint([
         today,
-        parseFloat(data[Object.keys(data)[i+1]])],
-      true,
-      true,
-      true,
+        parseFloat(data[Object.keys(data)[i + 1]])],
+        true,
+        true,
+        true,
       );
     }
     /* Display data next to icon */
@@ -504,54 +504,54 @@ function displayData(data) {
     valueToDisplay.innerHTML = dataToDisplay[i];
   }
   /* Waterflow chart (Water In and Out) */
-  for (let i=0; i<=1; i++) {
+  for (let i = 0; i <= 1; i++) {
     if (l < 50) {
       chartWaterFlow.series[i].addPoint([
         today,
-        parseFloat(data[Object.keys(data)[i+5]])],
-      true,
-      false,
-      true,
+        parseFloat(data[Object.keys(data)[i + 5]])],
+        true,
+        false,
+        true,
       );
     } else {
       chartWaterFlow.series[i].addPoint([
         today,
-        parseFloat(data[Object.keys(data)[i+5]])],
-      true,
-      true,
-      true,
+        parseFloat(data[Object.keys(data)[i + 5]])],
+        true,
+        true,
+        true,
       );
     }
-    const valueToDisplay = document.getElementById(dataToFind[i+4]);
-    valueToDisplay.innerHTML = dataToDisplay[i+4];
+    const valueToDisplay = document.getElementById(dataToFind[i + 4]);
+    valueToDisplay.innerHTML = dataToDisplay[i + 4];
   }
   /* Waterflow parameters chart (EC, Water temperature at Water Out) */
-  for (let i=0; i<=1; i++) {
+  for (let i = 0; i <= 1; i++) {
     if (l < 50) {
       chartWaterParams.series[i].addPoint([
         today,
-        parseFloat(data[Object.keys(data)[i+7]])],
-      true,
-      false,
-      true,
+        parseFloat(data[Object.keys(data)[i + 7]])],
+        true,
+        false,
+        true,
       );
     } else {
       chartWaterParams.series[i].addPoint([
         today,
-        parseFloat(data[Object.keys(data)[i+7]])],
-      true,
-      true,
-      true,
+        parseFloat(data[Object.keys(data)[i + 7]])],
+        true,
+        true,
+        true,
       );
     }
-    const valueToDisplay = document.getElementById(dataToFind[i+6]);
-    valueToDisplay.innerHTML = dataToDisplay[i+6];
+    const valueToDisplay = document.getElementById(dataToFind[i + 6]);
+    valueToDisplay.innerHTML = dataToDisplay[i + 6];
   }
 
   /* Display date and Time */
   const d = new Date();
   let valueToDisplay = document.getElementById(dataToFind[9]);
-  valueToDisplay.innerHTML = d.getDate()+'.'+d.getMonth()+'.'+d.getFullYear();
+  valueToDisplay.innerHTML = d.getDate() + '.' + d.getMonth() + '.' + d.getFullYear();
   valueToDisplay = document.getElementById(dataToFind[10]);
   if (d.getMinutes() < 10) {
     valueToDisplay.innerHTML = d.getHours() + ':0' + d.getMinutes();
@@ -589,7 +589,7 @@ function saveDatabase(data) {
 function createDatabaseTable() {
   /* For GUI simulation only (fake time) */
   const d = new Date();
-  let hour = d.getHours()-1;
+  let hour = d.getHours() - 1;
   let minute = 0;
 
   const table = document.getElementById('database-table');
@@ -604,7 +604,7 @@ function createDatabaseTable() {
         minute = '0' + minute.toString();
       }
       if (minute >= 60) {
-        hour ++;
+        hour++;
         minute = '00';
       }
       /* Create the database table */
@@ -620,11 +620,11 @@ function createDatabaseTable() {
                       <td>${row[Object.keys(row)[8]]}</td>
                     </tr>`;
       table.innerHTML += data; // Dislay the database table
-      minute ++; // For GUI simulation only
+      minute++; // For GUI simulation only
     });
   }
   /* When the table is created, remove the loader gif page */
-  setTimeout(function() {
+  setTimeout(function () {
     const loader = document.querySelector('.loader');
     loader.classList.remove('show');
   }, 500);
@@ -634,7 +634,7 @@ function createDatabaseTable() {
 this.navLinks = Array.from(document.querySelectorAll('.main-nav button'));
 /* Listener for nav buttons (on the left) */
 for (const link of this.navLinks) {
-  link.addEventListener('click', function(e) {
+  link.addEventListener('click', function (e) {
     e.preventDefault();
     const href = link.getAttribute('href'); // Eead the href of each page
     const id = href.substring(1);// Remove the '#' from page href
@@ -645,7 +645,7 @@ for (const link of this.navLinks) {
       const loader = document.querySelector('.loader');
       loader.classList.add('show'); // Loader GIF on
       /* Timeout needed to display the loader properly (stuck bug)*/
-      setTimeout(function() {
+      setTimeout(function () {
         createDatabaseTable();
       }, 250);
     }
@@ -657,7 +657,7 @@ for (const link of this.navLinks) {
       const settingsButtons = document.querySelectorAll('.settings-button');
       /* After chosing the setting, display only the popup, hide the rest */
       settingsButtons.forEach((settingButton) => {
-        settingButton.addEventListener('click', function(e) {
+        settingButton.addEventListener('click', function (e) {
           e.preventDefault();
           wholePage.style.display = 'none';
           settingsList.style.display = 'none';
@@ -688,7 +688,7 @@ function choosePopup(choosenSetting) {
   selectedPopup.style.display = 'block';
 
   /* Add back visibility to the rest of the page if canceled*/
-  negativeAnswer.addEventListener('click', function(e) {
+  negativeAnswer.addEventListener('click', function (e) {
     e.preventDefault();
     e.stopPropagation();
     selectedPopup.style.display = 'none';
@@ -696,11 +696,11 @@ function choosePopup(choosenSetting) {
     settingsList.style.display = 'block';
     infoDiv.style.display = 'none';
     return;
-  }, {once: true});
+  }, { once: true });
 
   /* Pass to calibration popup with choosen setting */
   selectedOptions.forEach((selectedOption) => {
-    selectedOption.addEventListener('click', function(e) {
+    selectedOption.addEventListener('click', function (e) {
       e.preventDefault();
       selectedPopup.style.display = 'none';
       calibrationPopup(this.id);
@@ -727,7 +727,7 @@ function calibrationPopup(choosenSetting) {
 
   selectedPopup.style.display = 'block';
 
-  negativeAnswer.addEventListener('click', function(event) {
+  negativeAnswer.addEventListener('click', function (event) {
     clearInterval(time);
     event.preventDefault();
     selectedPopup.style.display = 'none';
@@ -738,7 +738,7 @@ function calibrationPopup(choosenSetting) {
   });
 
   /* Start the calibration function */
-  positiveAnswer.addEventListener('click', function(e) {
+  positiveAnswer.addEventListener('click', function (e) {
     e.preventDefault();
     if (input.value.length > 0) {
       settingAction(this.id);
@@ -747,7 +747,7 @@ function calibrationPopup(choosenSetting) {
       settingsList.style.display = 'block';
       infoDiv.style.display = 'none';
     }
-  }, {once: true});
+  }, { once: true });
 
   /* Temporarly tests - request for analog readings
   if (selectedPopup.style.display = 'block') {
@@ -779,29 +779,29 @@ function confirmationPopup(choosenSetting) {
 
   selectedPopup.style.display = 'block';
   /* If the answer is negative then display everything back (canceled) */
-  negativeAnswer.addEventListener('click', function(e) {
+  negativeAnswer.addEventListener('click', function (e) {
     e.preventDefault();
     selectedPopup.style.display = 'none';
     wholePage.style.display = 'block';
     settingsList.style.display = 'block';
     infoDiv.style.display = 'none';
-  }, {once: true});
+  }, { once: true });
   /* If positive answer then start the choosen calibration function */
-  positiveAnswer.addEventListener('click', function(e) {
+  positiveAnswer.addEventListener('click', function (e) {
     e.preventDefault();
     settingAction(this.id); // Start the calibration
     selectedPopup.style.display = 'none';
     wholePage.style.display = 'block';
     settingsList.style.display = 'block';
     infoDiv.style.display = 'none';
-  }, {once: true});
+  }, { once: true });
 }
 
 /** Actions for selected settings (delete, download database, restart, calibrate)
   * @param {action} action of choosen possible actions
  **/
 function settingAction(action) {
-  if ( action == 'aff-delete-database') {
+  if (action == 'aff-delete-database') {
     deleteDatabase();
   }
   if (action == 'aff-download-database') {
@@ -844,7 +844,7 @@ function restartDevice() {
 
   /* For GUI simulation only */
   console.log('Device: restarting!');
-  setTimeout(function() {
+  setTimeout(function () {
     location.reload();
   }, 1000);
 }
